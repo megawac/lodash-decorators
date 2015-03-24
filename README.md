@@ -8,9 +8,10 @@ I've made the most useful set (for this case) of the wrapping functions `lodash`
 ```js
 import {
     after, autobind, before, curry,
-    curryRight, debounce, memoize,
-    negate, once, throttle
+    curryRight, debounce, flow, flowRight,
+    memoize, negate, once, throttle
 } from 'lodash-decorators';
+import _ from 'lodash';
 
 class DecoratedClass {
   @after(3)
@@ -40,6 +41,16 @@ class DecoratedClass {
     this.notifier('Debounce called');
   }
 
+  @flow(_.isString)
+  get composed() {
+    return Math.random > 0.5 ? 'string' : null;
+  }
+
+  @flowRight(_.isString)
+  set compose(isArgString) {
+    this.notifier('Compose called with string:', isArgString);
+  }
+
   @memoize
   memoize(a, b) {
     this.notifier('Memoize called with', a, b);
@@ -57,8 +68,8 @@ class DecoratedClass {
   }
 
   @once
-  set once() {
-    this.notifier('Set once was called');
+  set once(a) {
+    this.notifier('Set once was called', a);
   }
 
   @throttle(1000, {leading: false})
@@ -69,5 +80,5 @@ class DecoratedClass {
   notifier() {
     console.log(arguments);
   }
-};
+}
 ```

@@ -1,43 +1,40 @@
 import has from 'lodash/object/has';
-import reduce from 'lodash/internal/arrayReduce';
+import each from 'lodash/internal/arrayEach';
 
-let lodashDecorators = [
-  'after', 'before', 'curry', 'curryRight', 'debounce',
-  'memoize', 'negate', 'once', 'spread', 'throttle'
+let methodDecorators = [
+  'after', 'before', 'curry', 'compose', 'curryRight', 'debounce',
+  'flow', 'flowRight', 'memoize', 'negate', 'once', 'spread', 'throttle'
 ];
 
-export function createDecorator(decoratorFunc) {
+export function createMethodDecorator(decoratorFunc) {
   return function wrapDecorator(...args) {
     return function decorator(target, name, descriptor) {
-      let {get, set, value} = descriptor;
-      if (typeof get === "function") {
-        descriptor.get = decoratorFunc(get, ...args);
-      }
-      else if (typeof set === "function") {
-        descriptor.set = decoratorFunc(set, ...args);
-      }
-      else if (typeof value === "function") {
-        descriptor.value = decoratorFunc(value, ...args);
-      }
+      each(['get', 'set', 'value'], prop => {
+        let method = decorator[get];
+        if (typeof method === 'function') {
+          descriptor[prop] = decoratorFunc(method, ...args);
+        }
+      });
       return descriptor;
     };
   };
 }
 
 export default function mixin(_instance) {
-  let decorators = reduce(lodashDecorators, (memo, method) => {
-    if (has(_instance, method)) {
-      memo[method] = createDecorator(_instance[method]);
-    }
-    return memo;
-  }, {});
+  let decorators = {};
   
   let {bind} = _instance;
   if (typeof bind === 'function') {
-    decorators.autobind = createDecorator(function(fn) {
+    decorators.autobind = createMethodDecorator(fn => function autobind() {
       return bind(fn, this);
     });
   }
+
+  each(methodDecorators, (method) => {
+    if (has(_instance, method)) {
+      decorators[method] = createMethodDecorator(_instance[method]);
+    }
+  });
 
   return decorators;
 }
