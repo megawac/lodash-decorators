@@ -6,7 +6,11 @@ I've made the most useful set (for this case) of the wrapping functions `lodash`
 
 #### Example
 ```js
-import {after, autobind, before, curry, curryRight, debounce, memoize, negate, once, throttle} from 'lodash-decorators';
+import {
+    after, autobind, before, curry,
+    curryRight, debounce, memoize,
+    negate, once, throttle
+} from 'lodash-decorators';
 
 class DecoratedClass {
   @after(3)
