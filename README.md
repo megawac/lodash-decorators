@@ -1,9 +1,4 @@
 # lodash-decorators
-[![Travis build status](http://img.shields.io/travis/megawac/lodash-decorators.svg?style=flat)](https://travis-ci.org/megawac/lodash-decorators)
-[![Code Climate](https://codeclimate.com/github/megawac/lodash-decorators/badges/gpa.svg)](https://codeclimate.com/github/megawac/lodash-decorators)
-[![Test Coverage](https://codeclimate.com/github/megawac/lodash-decorators/badges/coverage.svg)](https://codeclimate.com/github/megawac/lodash-decorators)
-[![Dependency Status](https://david-dm.org/megawac/lodash-decorators.svg)](https://david-dm.org/megawac/lodash-decorators)
-[![devDependency Status](https://david-dm.org/megawac/lodash-decorators/dev-status.svg)](https://david-dm.org/megawac/lodash-decorators#info=devDependencies)
 
 As [the ES7 decorators proposal](https://github.com/wycats/javascript-decorators) [start to gain popularity and creep into JS transpilers](https://twitter.com/sebmck/status/579300313514950657), it seems like a great time to implement some of the most useful ones provided by `lodash` and `underscore`. As currently no environment or transpiler fully supports generators yet, the code in this repo is hypothetical. [`Babel` is planning to release `decorators` soon](https://twitter.com/sebmck/status/579482622998409217) (updates to follow).
 
