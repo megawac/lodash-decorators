@@ -25,10 +25,19 @@ export function createDecorator(decoratorFunc) {
 }
 
 export default function mixin(_instance) {
-  return reduce(lodashDecorators, (memo, method) => {
+  let decorators = reduce(lodashDecorators, (memo, method) => {
     if (has(_instance, method)) {
       memo[method] = createDecorator(_instance[method]);
     }
     return memo;
   }, {});
+  
+  let {bind} = _instance;
+  if (typeof bind === 'function') {
+    decorators.autobind = createDecorator(function(fn) {
+      return bind(fn, this);
+    });
+  }
+
+  return decorators;
 }

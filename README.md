@@ -6,7 +6,7 @@ I've made the most useful set (for this case) of the wrapping functions `lodash`
 
 #### Example
 ```js
-import {after, before, curry, curryRight, debounce, memoize, negate, once, throttle} from 'lodash-decorators';
+import {after, autobind, before, curry, curryRight, debounce, memoize, negate, once, throttle} from 'lodash-decorators';
 
 class DecoratedClass {
   @after(3)
@@ -19,11 +19,13 @@ class DecoratedClass {
     this.notifier('Before has been called');
   }
 
+  @autobind
   @curry
   curry(a, b, c) {
     this.notifier('Curry called with ', a, b, c);
   }
 
+  @autobind
   @curryRight
   curryRight(a, b, c) {
     this.notifier('curryRight called with ', a, b, c);
