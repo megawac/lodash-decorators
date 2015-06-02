@@ -1,6 +1,6 @@
 {
   "name": "lodash-decorators",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A set of ES7 decorators from lodash",
   "main": "dist/index.js",
   "scripts": {
@@ -48,6 +48,6 @@
     ]
   },
   "dependencies": {
-    "lodash": "^3.5.0"
+    "lodash": "^3.9.3"
   }
 }
